@@ -47,7 +47,7 @@
 
                 array_push($fileList, $match[1], $data['公司狀況'], $data['公司名稱'], $data['資本總額(元)'],
                     $data['代表人姓名'], $data['公司所在地'], $data['登記機關'], $AccessTime, $LastChangeTime, $Director, $ManagerList, $data['停業日期(起)'], $data['停業日期(迄)']);
-
+                print_r($fileList);
                 //print_r($fileList);
                 //echo "<hr>";
                 //Append 用後清除
