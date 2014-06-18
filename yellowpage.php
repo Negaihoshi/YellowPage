@@ -8,7 +8,7 @@
     $dbh = new PDO($dsn, $db_user, $db_password);
     $dbh->query('SET NAMES UTF8');
 
-    $sql = "SELECT `Count` FROM `dataCount`";
+    $sql = "SELECT `Count` FROM `companyCount`";
 
     $sth = $dbh->prepare($sql);
     $sth->execute();
@@ -99,6 +99,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
+            <li><a href="#">所有類別 </a></li>
             <li><a href="#">Ａ大類【農、林、漁、牧業】 </a></li>
             <li><a href="#">Ｂ大類【礦業及土石採取業】 </a></li>
             <li><a href="#">Ｃ大類【製造業】 </a></li>
@@ -134,25 +135,25 @@
             </li>
             <li>
               <a href="yellowpage.php?Type=Business">
-                <span class="badge pull-right"><?php echo $number_of_rows[4]['Count']; ?></span>
+                <span class="badge pull-right"><?php echo $number_of_rows[3]['Count']; ?></span>
                 商業
               </a>
             </li>
             <li>
               <a href="#">
-                <span class="badge pull-right">42</span>
+                <span class="badge pull-right">0</span>
                 工廠
               </a>
             </li>
             <li>
               <a href="#">
-                <span class="badge pull-right">42</span>
+                <span class="badge pull-right">0</span>
                 協會
               </a>
             </li>
             <li>
               <a href="#">
-                <span class="badge pull-right">42</span>
+                <span class="badge pull-right">0</span>
                 基金會
               </a>
             </li>
