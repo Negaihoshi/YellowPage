@@ -98,6 +98,7 @@
     <div class="container-fluid" ng-controller="yellowpage">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+            <!--
           <ul class="nav nav-sidebar">
             <li><a href="#">所有類別 </a></li>
             <li><a href="#">Ａ大類【農、林、漁、牧業】 </a></li>
@@ -112,6 +113,7 @@
             <li><a href="#">Ｊ大類【文化、運動、休閒及其他服務業】 </a></li>
             <li><a href="#">Ｚ大類【其他未分類業】 </a></li>
           </ul>
+            -->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <ul class="nav nav-pills">
@@ -175,9 +177,9 @@
                 </thead>
                 <tbody>
                   <tr  ng-repeat="company in companys">
-                    <td>{{company.Id}}</td>
+                    <td><a href="YellowPageCompany.php?Id={{company.Id}}">{{company.Id}}</a></td>
                     <td>{{company.Type}}</td>
-                    <td>{{company.Name}}</td>
+                    <td><a href="YellowPageCompany.php?Id={{company.Id}}">{{company.Name}}</a></td>
                   </tr>
 
                 </tbody>
@@ -196,7 +198,7 @@
                             $TypeNumber = 2;
                             break;
                         case 'Business':
-                            $TypeNumber = 4;
+                            $TypeNumber = 3;
                             break;
 
                         default:
