@@ -73,17 +73,17 @@
                 $pattern1 = '/\[\"\",/';
                 $Business = preg_replace($pattern1, $replacement1, $Business);
               
-                echo "Director =>".$Director."<br>";
-                echo "ManagerList =>".$ManagerList."<br>";
-                echo "Business =>".$Business."<br>";
+              //  echo "Director =>".$Director."<br>";
+              //  echo "ManagerList =>".$ManagerList."<br>";
+              //  echo "Business =>".$Business."<br>";
 
                 array_push($fileList, $match[1], $data['公司狀況'], $data['公司名稱'], $data['資本總額(元)'],
                     $data['代表人姓名'], $data['公司所在地'], $data['登記機關'], $AccessTime, $LastChangeTime, $Business, $Director, $ManagerList, $data['停業日期(起)'], $data['停業日期(迄)']);
                 //print_r($fileList);
-                $dataList = "(".implode(",", $fileList).")";
-                $sql = $defaultSQL.$dataList;
-                echo $sql;
-                mysql_query($sql) or die('<br>Insert data fail: '.mysql_error());
+                //$dataList = "(".implode(",", $fileList).")";
+               // $sql = $defaultSQL.$dataList;
+               // echo $sql;
+               // mysql_query($sql) or die('<br>Insert data fail: '.mysql_error());
                 //Append 用後清除
                 $fileList = array();
             }else if((isset($data['公司狀況']) && $data['公司狀況']=='解散')||(isset($data['公司狀況']) && $data['公司狀況']=='撤銷')||(isset($data['公司狀況']) && $data['公司狀況']=='核准設立，但已命令解散')){
@@ -143,7 +143,7 @@
                 //echo $LastChangeTime;
                 //echo $AccessTime;
                 //echo "<hr>";
-            }else if((isset($data['公司狀況']) && $data['公司狀況']=='核准報備')||(isset($data['公司狀況']) && $data['公司狀況']=='合併解散')||(isset($data['分公司名稱'])  && $data['分公司狀況']=='核准設立')){
+            }else if((isset($data['公司狀況']) && $data['公司狀況']=='核准報備')||(isset($data['公司狀況']) && $data['公司狀況']=='合併解散')){
                 //print_r($data);
                 //格式化時間
                 $AccessTime = $data['核准設立日期']['year']."/".$data['核准設立日期']['month']."/".$data['核准設立日期']['day'];
@@ -155,7 +155,114 @@
                 //echo $LastChangeTime;
                 //echo $AccessTime;
                 //echo "<hr>";
-            }else if((isset($data['分公司名稱'])  && $data['分公司狀況']=='撤銷')||(isset($data['分公司名稱'])  && $data['分公司狀況']=='廢止')||(isset($data['商業名稱']) && $data['現況']=='核准設立')||(isset($data['商業名稱']) && $data['現況']=='歇業')||(isset($data['商業名稱']) && $data['現況']=='核准停業')){
+            }else if((isset($data['分公司名稱'])  && $data['分公司狀況']=='核准設立')){
+                //print_r($data);
+                //格式化時間
+                if(!empty($data['核准設立日期']['year'])){
+                    $AccessTime = $data['核准設立日期']['year']."/".$data['核准設立日期']['month']."/".$data['核准設立日期']['day'];
+                }else{
+                    $AccessTime = "";
+                }
+                if(!empty($data['最後核准變更日期']['year'])){
+                    $LastChangeTime = $data['最後核准變更日期']['year']."/".$data['最後核准變更日期']['month']."/".$data['最後核准變更日期']['day'];
+                }else{
+                    $LastChangeTime = "";
+                }
+
+                $defaultDataSQL = "INSERT INTO `subcompanyData`(
+                `DataId`, `AccessTime`, `LastChangeTime`, `SubcompanyAddress`, `SubcompanyType`, `SubcompanyName`, `SubcompanyManager`, `Id`) VALUES ";
+                $SubcompanyManager = $data['分公司經理姓名'];
+                $SubcompanyName = $data['分公司名稱'];
+                $SubcompanyAddress = $data['分公司所在地'];
+                $SubcompanyType = $data['分公司狀況'];
+                $Id = $data['總(本)公司統一編號'];
+                //加引號
+
+                $Id = "'".$Id."'";
+                $SubcompanyType = "'".$SubcompanyType."'";
+                $SubcompanyAddress = "'".$SubcompanyAddress."'";
+                $SubcompanyName = "'".$SubcompanyName."'";
+                $SubcompanyManager = "'".$SubcompanyManager."'";
+                $match[1] = "'".$match[1]."'";
+                $AccessTime = "'".$AccessTime."'";
+                $LastChangeTime = "'".$LastChangeTime."'";
+
+
+
+
+                array_push($fileList, $match[1], 
+                    $AccessTime, $LastChangeTime, $SubcompanyAddress, $SubcompanyType, $SubcompanyName, $SubcompanyManager, $Id);
+                //print_r($fileList);
+                //$dataList = "(".implode(",", $fileList).")";
+                //$sql = $defaultDataSQL.$dataList;
+                //echo $sql;
+                //mysql_query($sql) or die('<br>Insert data fail: '.mysql_error());
+                //Append 用後清除
+                $fileList = array();
+
+
+            }else if(isset($data['商業名稱']) && $data['現況']=='核准設立'){
+                //print_r($data);
+                //格式化時間
+                if(!empty($data['核准設立日期']['year'])){
+                    $AccessTime = $data['核准設立日期']['year']."/".$data['核准設立日期']['month']."/".$data['核准設立日期']['day'];
+                }else{
+                    $AccessTime = "";
+                }
+                if(!empty($data['最近異動日期']['year'])){
+                    $LastChangeTime = $data['最近異動日期']['year']."/".$data['最近異動日期']['month']."/".$data['最近異動日期']['day'];
+                }else{
+                    $LastChangeTime = "";
+                }
+
+                $defaultBusinessDataSQL = "INSERT INTO `businessData`(
+                `DataId`, `Government`, `AccessTime`, `LastChangeTime`, `BusinessName`, `Leader`, `BusinessType`, `AssetAmount`, `OrganizationType`, `BusinessAddress`, `Business`) VALUES ";
+
+                $Government = $data['登記機關'];
+                $BusinessName = $data['商業名稱'];
+                $Leader = $data['負責人姓名'];
+                $BusinessType = $data['現況'];
+                $AssetAmount = $data['資本額(元)'];
+                $OrganizationType = $data['組織類型'];
+                $BusinessAddress = $data['地址'];
+                $Business = json_encode($data['營業項目'], JSON_UNESCAPED_UNICODE);
+
+                //加引號
+                $match[1] = "'".$match[1]."'";
+                $Government = "'".$Government."'";
+                $AccessTime = "'".$AccessTime."'";
+                $LastChangeTime = "'".$LastChangeTime."'";
+                $BusinessName = "'".$BusinessName."'";
+                $Leader = "'".$Leader."'";
+                $BusinessType = "'".$BusinessType."'";
+                $AssetAmount = "'".$AssetAmount."'";
+                $OrganizationType = "'".$OrganizationType."'";
+                $BusinessAddress = "'".$BusinessAddress."'";
+                $Business = "'".$Business."'";
+
+                if($Business == "'[]'") $Business = "''";
+
+
+                $replacement1 = "";
+                $pattern1 = '/r|n|t*/';
+                $Business = preg_replace($pattern1, $replacement1, $Business);
+
+                $replacement1 = " ";
+                $pattern1 = '/\\\/';
+                $Business = preg_replace($pattern1, $replacement1, $Business);
+
+                array_push($fileList, $match[1], $Government,
+                    $AccessTime, $LastChangeTime, $BusinessName, $Leader, $BusinessType, $AssetAmount, $OrganizationType, $BusinessAddress, $Business);
+                //print_r($fileList);
+                //$dataList = "(".implode(",", $fileList).")";
+                //$sql = $defaultBusinessDataSQL.$dataList;
+               // echo $sql;
+                //mysql_query($sql) or die('<br>Insert data fail: '.mysql_error());
+                //Append 用後清除
+                $fileList = array();
+
+
+            }else if((isset($data['分公司名稱'])  && $data['分公司狀況']=='撤銷')||(isset($data['分公司名稱'])  && $data['分公司狀況']=='廢止')||(isset($data['商業名稱']) && $data['現況']=='歇業')||(isset($data['商業名稱']) && $data['現況']=='核准停業')){
                 //print_r($data);
                 //格式化時間
                 $AccessTime = $data['核准設立日期']['year']."/".$data['核准設立日期']['month']."/".$data['核准設立日期']['day'];

@@ -42,6 +42,14 @@
         case 'Education':
             $Type = "教育部";
             break;
+        case 'Organization':
+            $Type = "Organization";
+            $TypeResult = "`Type`="."'職業團體'"." OR "."`Type`="."'社會團體'";
+            break;
+        case 'Fundation':
+            $Type = "Fundation";
+            $TypeResult = "`Type`="."'基金會'";
+            break;
         default:
             $Type = "All";
             break;
@@ -57,6 +65,10 @@
 
     if($Type=="All"){
         $sql = "SELECT * FROM `companyIndex` Limit ".$start.",25";
+    }else if($Type=="Fundation"){
+        $sql = "SELECT * FROM `fundOrganIndex` WHERE ".$TypeResult." Limit ".$start.",25";
+    }else if($Type=="Organization"){
+        $sql = "SELECT * FROM `fundOrganIndex` WHERE ".$TypeResult." Limit ".$start.",25";
     }else{
         $sql = "SELECT * FROM `companyIndex` WHERE `Type`= '"."$Type"."' Limit ".$start.",25";
     }
@@ -75,4 +87,6 @@
 
     $dbh = NULL;
 */
+
+//."AND".`Type`="職業團體"."' Limit ".$start.",25"
 ?>

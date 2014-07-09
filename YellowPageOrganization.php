@@ -8,11 +8,12 @@
     $dbh = new PDO($dsn, $db_user, $db_password);
     $dbh->query('SET NAMES UTF8');
 
-    $sql = "SELECT * FROM `companyData` WHERE `Id`=".$ID;
+    $sql = "SELECT * FROM `organizationData` WHERE `DataId`=".$ID;
 
     $sth = $dbh->prepare($sql);
     $sth->execute();
     $data = $sth->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>名錄 || <?echo $data['CompanyName'];?></title>
+    <title>名錄 || <?echo $data['Name'];?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +45,6 @@
   </head>
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -101,60 +101,44 @@
               <table class="table  table-hover Bordered table" >
                 <tbody>
                   <tr>
-                    <td>統一編號</td>
-                    <td><?echo $data['Id'];?></td>
+                    <td>編號</td>
+                    <td><?echo $data['DataId'];?></td>
                   </tr>
                   <tr>
-                    <td>公司名稱</td>
-                    <td><?echo $data['CompanyName'];?></td>
+                    <td>名稱</td>
+                    <td><?echo $data['Name'];?></td>
                   </tr>
                   <tr>
-                    <td>公司狀況</td>
-                    <td><?echo $data['CompanyType'];?></td>
+                    <td>分類</td>
+                    <td><?echo $data['Type'];?></td>
                   </tr>
                   <tr>
-                    <td>資本總額(元)</td>
-                    <td><?echo $data['AssetAmount'];?></td>
+                    <td>子分類</td>
+                    <td><?echo $data['SubType'];?></td>
                   </tr>
                   <tr>
-                    <td>代表人姓名</td>
+                    <td>會長頭銜</td>
+                    <td><?echo $data['JobTitle'];?></td>
+                  </tr>
+                  <tr>
+                    <td>會長名稱</td>
                     <td><?echo $data['Leader'];?></td>
                   </tr>
                   <tr>
-                    <td>公司所在地</td>
-                    <td><?echo $data['CompanyAddress'];?></td>
+                    <td>成立日期</td>
+                    <td><?echo $data['CreateDate'];?></td>
                   </tr>
                   <tr>
-                    <td>登記機關</td>
-                    <td><?echo $data['Government'];?></td>
+                    <td>電話</td>
+                    <td><?echo $data['Phone'];?></td>
                   </tr>
                   <tr>
-                    <td>核准設立日期</td>
-                    <td><?echo $data['AccessTime'];?></td>
+                    <td>核准立案字號</td>
+                    <td><?echo $data['GovId'];?></td>
                   </tr>
                   <tr>
-                    <td>最後核准變更日期</td>
-                    <td><?echo $data['LastChangeTime'];?></td>
-                  </tr>
-                  <tr>
-                    <td>所營事業資料</td>
-                    <td><?echo $data['Business'];?></td>
-                  </tr>
-                  <tr>
-                    <td>董監事名單</td>
-                    <td><?echo $data['Director'];?></td>
-                  </tr>
-                  <tr>
-                    <td>經理人名單</td>
-                    <td><?echo $data['ManagerList'];?></td>
-                  </tr>
-                  <tr>
-                    <td>停業日期(起)</td>
-                    <td><?echo $data['StopDateFrom'];?></td>
-                  </tr>
-                  <tr>
-                    <td>停業日期(迄)</td>
-                    <td><?echo $data['StopDateTo'];?></td>
+                    <td>會址</td>
+                    <td><?echo $data['Address'];?></td>
                   </tr>
                   <tr>
                     <td>網址</td>
@@ -192,6 +176,7 @@
 
 
         yellowpage.controller('yellowpage', function($scope, $http) {
+
             $http.get('fileListGet.php?start=<? echo $_GET["start"]?>&Type=<? echo $_GET["Type"]?>').success(function(data) {
                 $scope.companys = data;
             });

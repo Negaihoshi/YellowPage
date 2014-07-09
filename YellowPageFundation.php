@@ -8,7 +8,7 @@
     $dbh = new PDO($dsn, $db_user, $db_password);
     $dbh->query('SET NAMES UTF8');
 
-    $sql = "SELECT * FROM `companyData` WHERE `Id`=".$ID;
+    $sql = "SELECT * FROM `fundationData` WHERE `DataId`=".$ID;
 
     $sth = $dbh->prepare($sql);
     $sth->execute();
@@ -25,7 +25,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>名錄 || <?echo $data['CompanyName'];?></title>
+    <title>名錄 || <?echo $data['Name'];?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -101,60 +101,68 @@
               <table class="table  table-hover Bordered table" >
                 <tbody>
                   <tr>
-                    <td>統一編號</td>
-                    <td><?echo $data['Id'];?></td>
+                    <td>編號</td>
+                    <td><?echo $data['DataId'];?></td>
                   </tr>
                   <tr>
-                    <td>公司名稱</td>
-                    <td><?echo $data['CompanyName'];?></td>
+                    <td>基金會名稱</td>
+                    <td><?echo $data['Name'];?></td>
                   </tr>
                   <tr>
-                    <td>公司狀況</td>
-                    <td><?echo $data['CompanyType'];?></td>
+                    <td>郵遞區號</td>
+                    <td><?echo $data['ZipCode_1'];?></td>
                   </tr>
                   <tr>
-                    <td>資本總額(元)</td>
-                    <td><?echo $data['AssetAmount'];?></td>
+                    <td>住址</td>
+                    <td><?echo $data['Address_1'];?></td>
                   </tr>
                   <tr>
-                    <td>代表人姓名</td>
-                    <td><?echo $data['Leader'];?></td>
-                  </tr>
-                  <tr>
-                    <td>公司所在地</td>
-                    <td><?echo $data['CompanyAddress'];?></td>
-                  </tr>
-                  <tr>
-                    <td>登記機關</td>
-                    <td><?echo $data['Government'];?></td>
-                  </tr>
-                  <tr>
-                    <td>核准設立日期</td>
-                    <td><?echo $data['AccessTime'];?></td>
-                  </tr>
-                  <tr>
-                    <td>最後核准變更日期</td>
-                    <td><?echo $data['LastChangeTime'];?></td>
-                  </tr>
-                  <tr>
-                    <td>所營事業資料</td>
-                    <td><?echo $data['Business'];?></td>
-                  </tr>
-                  <tr>
-                    <td>董監事名單</td>
+                    <td>董事長</td>
                     <td><?echo $data['Director'];?></td>
                   </tr>
                   <tr>
-                    <td>經理人名單</td>
-                    <td><?echo $data['ManagerList'];?></td>
+                    <td>目的</td>
+                    <td><?echo $data['Purpose'];?></td>
                   </tr>
                   <tr>
-                    <td>停業日期(起)</td>
-                    <td><?echo $data['StopDateFrom'];?></td>
+                    <td>許可日期</td>
+                    <td><?echo $data['AccessTime'];?></td>
                   </tr>
                   <tr>
-                    <td>停業日期(迄)</td>
-                    <td><?echo $data['StopDateTo'];?></td>
+                    <td>文號</td>
+                    <td><?echo $data['WordNumber'];?></td>
+                  </tr>
+                  <tr>
+                    <td>原始設立基金</td>
+                    <td><?echo $data['OriginFund'];?></td>
+                  </tr>
+                  <tr>
+                    <td>目前基金總額</td>
+                    <td><?echo $data['CurrentFund'];?></td>
+                  </tr>
+                  <tr>
+                    <td>聯絡電話</td>
+                    <td><?echo $data['Telephone'];?></td>
+                  </tr>
+                  <tr>
+                    <td>聯絡人</td>
+                    <td><?echo $data['Contactor'];?></td>
+                  </tr>
+                  <tr>
+                    <td>FAX</td>
+                    <td><?echo $data['Fax'];?></td>
+                  </tr>
+                  <tr>
+                    <td>郵遞區號</td>
+                    <td><?echo $data['ZipCode_2'];?></td>
+                  </tr>
+                  <tr>
+                    <td>聯絡地址</td>
+                    <td><?echo $data['Address_2'];?></td>
+                  </tr>
+                  <tr>
+                    <td>備註</td>
+                    <td><?echo $data['Remark'];?></td>
                   </tr>
                   <tr>
                     <td>網址</td>

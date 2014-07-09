@@ -12,6 +12,7 @@
     $sth->execute();
     echo "Table Truncate......."."<br>\n";
 
+
     echo "All Data Counting......."."<br>\n";
     $sql = "SELECT COUNT(*) FROM `companyIndex`";
     $sth = $dbh->prepare($sql);
@@ -23,8 +24,10 @@
     $sth->execute();
     echo $number_of_rows."<br>\n";
 
-    $TypeList = array('公司','分公司','商業登記','教育部','其他');
-    $NameList = array('Company','SubCompany','Business','Education','Else');
+
+    $TypeList = array('公司','分公司','商業登記','教育部','其他','社會團體','職業團體','基金會');
+    $NameList = array('Company','SubCompany','Business','Education','Else','Social','Professional','Fundation');
+
     for ($count=0; $count < 5; $count++) {
 
         echo $NameList[$count]." Data Counting......."."<br>\n";
@@ -40,4 +43,38 @@
 
     }
 
+    echo $NameList[5]." Data Counting......."."<br>\n";
+    $sql = "SELECT COUNT(*) FROM `fundOrganIndex` WHERE `Type`='".$TypeList[5]."'";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    $number_of_rows = $sth->fetchColumn();
+
+    $sql = "INSERT INTO `companyCount`(`Type`, `Count`) VALUES ('".$NameList[5]."',$number_of_rows)";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    echo $number_of_rows."<br>\n";
+
+
+    echo $NameList[6]." Data Counting......."."<br>\n";
+    $sql = "SELECT COUNT(*) FROM `fundOrganIndex` WHERE `Type`='".$TypeList[6]."'";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    $number_of_rows = $sth->fetchColumn();
+
+    $sql = "INSERT INTO `companyCount`(`Type`, `Count`) VALUES ('".$NameList[6]."',$number_of_rows)";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    echo $number_of_rows."<br>\n";
+
+
+    echo $NameList[7]." Data Counting......."."<br>\n";
+    $sql = "SELECT COUNT(*) FROM `fundOrganIndex` WHERE `Type`='".$TypeList[7]."'";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    $number_of_rows = $sth->fetchColumn();
+
+    $sql = "INSERT INTO `companyCount`(`Type`, `Count`) VALUES ('".$NameList[7]."',$number_of_rows)";
+    $sth = $dbh->prepare($sql);
+    $sth->execute();
+    echo $number_of_rows."<br>\n";
 ?>

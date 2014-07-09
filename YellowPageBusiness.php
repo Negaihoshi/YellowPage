@@ -8,7 +8,7 @@
     $dbh = new PDO($dsn, $db_user, $db_password);
     $dbh->query('SET NAMES UTF8');
 
-    $sql = "SELECT * FROM `companyData` WHERE `Id`=".$ID;
+    $sql = "SELECT * FROM `businessData` WHERE `DataId`=".$ID;
 
     $sth = $dbh->prepare($sql);
     $sth->execute();
@@ -25,7 +25,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>名錄 || <?echo $data['CompanyName'];?></title>
+    <title>名錄 || <?echo $data['BusinessName'];?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -101,28 +101,8 @@
               <table class="table  table-hover Bordered table" >
                 <tbody>
                   <tr>
-                    <td>統一編號</td>
-                    <td><?echo $data['Id'];?></td>
-                  </tr>
-                  <tr>
-                    <td>公司名稱</td>
-                    <td><?echo $data['CompanyName'];?></td>
-                  </tr>
-                  <tr>
-                    <td>公司狀況</td>
-                    <td><?echo $data['CompanyType'];?></td>
-                  </tr>
-                  <tr>
-                    <td>資本總額(元)</td>
-                    <td><?echo $data['AssetAmount'];?></td>
-                  </tr>
-                  <tr>
-                    <td>代表人姓名</td>
-                    <td><?echo $data['Leader'];?></td>
-                  </tr>
-                  <tr>
-                    <td>公司所在地</td>
-                    <td><?echo $data['CompanyAddress'];?></td>
+                    <td>ID</td>
+                    <td><?echo $data['DataId'];?></td>
                   </tr>
                   <tr>
                     <td>登記機關</td>
@@ -133,28 +113,36 @@
                     <td><?echo $data['AccessTime'];?></td>
                   </tr>
                   <tr>
-                    <td>最後核准變更日期</td>
+                    <td>最近異動日期</td>
                     <td><?echo $data['LastChangeTime'];?></td>
                   </tr>
                   <tr>
-                    <td>所營事業資料</td>
+                    <td>商業名稱</td>
+                    <td><?echo $data['BusinessName'];?></td>
+                  </tr>
+                  <tr>
+                    <td>負責人姓名</td>
+                    <td><?echo $data['Leader'];?></td>
+                  </tr>
+                  <tr>
+                    <td>現況</td>
+                    <td><?echo $data['BusinessType'];?></td>
+                  </tr>
+                  <tr>
+                    <td>資本額(元)</td>
+                    <td><?echo $data['AssetAmount'];?></td>
+                  </tr>
+                  <tr>
+                    <td>組織類型</td>
+                    <td><?echo $data['OrganizationType'];?></td>
+                  </tr>
+                  <tr>
+                    <td>地址</td>
+                    <td><?echo $data['BusinessAddress'];?></td>
+                  </tr>
+                  <tr>
+                    <td>營業項目</td>
                     <td><?echo $data['Business'];?></td>
-                  </tr>
-                  <tr>
-                    <td>董監事名單</td>
-                    <td><?echo $data['Director'];?></td>
-                  </tr>
-                  <tr>
-                    <td>經理人名單</td>
-                    <td><?echo $data['ManagerList'];?></td>
-                  </tr>
-                  <tr>
-                    <td>停業日期(起)</td>
-                    <td><?echo $data['StopDateFrom'];?></td>
-                  </tr>
-                  <tr>
-                    <td>停業日期(迄)</td>
-                    <td><?echo $data['StopDateTo'];?></td>
                   </tr>
                   <tr>
                     <td>網址</td>
@@ -164,6 +152,7 @@
                     <td>電話</td>
                     <td></td>
                   </tr>
+
                 </tbody>
 
               </table>

@@ -96,6 +96,7 @@
     </div>
 
     <div class="container-fluid" ng-controller="yellowpage">
+
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <!--
@@ -142,20 +143,14 @@
               </a>
             </li>
             <li>
-              <a href="#">
-                <span class="badge pull-right">0</span>
-                工廠
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="badge pull-right">0</span>
+              <a href="yellowpage.php?Type=Organization">
+                <span class="badge pull-right"><?php echo $number_of_rows[6]['Count']+$number_of_rows[7]['Count']; ?></span>
                 協會
               </a>
             </li>
             <li>
-              <a href="#">
-                <span class="badge pull-right">0</span>
+              <a href="yellowpage.php?Type=Fundation">
+                <span class="badge pull-right"><?php echo $number_of_rows[8]['Count']; ?></span>
                 基金會
               </a>
             </li>
@@ -170,16 +165,85 @@
               <table class="table  table-hover Bordered table" >
                 <thead>
                   <tr>
-                    <td>統一編號</td>
+                    <td>編號</td>
                     <td>類型</td>
                     <td>名稱</td>
                   </tr>
                 </thead>
+
                 <tbody>
-                  <tr  ng-repeat="company in companys">
-                    <td><a href="YellowPageCompany.php?Id={{company.Id}}">{{company.Id}}</a></td>
+                <tr  ng-repeat="company in companys">
+                    <td>
+                        <?
+                            switch ($_GET['Type'])
+                            {
+                                case 'All':
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Id}}</a>";
+                                    break;
+
+                                case 'SubCompany':
+                                    echo "<a href='YellowPageSubCompany.php?Id={{company.Id}}'>{{company.Id}}</a>";
+                                    break;
+
+                                case 'Company':
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Id}}</a>";
+                                    break;
+
+                                case 'Business':
+                                    echo "<a href='YellowPageBusiness.php?Id={{company.Id}}'>{{company.Id}}</a>";
+                                    break;
+
+                                case 'Organization':
+                                    echo "<a href='YellowPageOrganization.php?Id={{company.DataId}}'>{{company.DataId}}</a>";
+                                    break;
+
+                                case 'Fundation':
+                                    echo "<a href='YellowPageFundation.php?Id={{company.DataId}}'>{{company.DataId}}</a>";
+                                    break;
+
+                                default:
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Id}}</a>";//尚未修改成company+fundation+organization
+                                    break;
+                            }
+                        ?>
+                    </td>
+
                     <td>{{company.Type}}</td>
-                    <td><a href="YellowPageCompany.php?Id={{company.Id}}">{{company.Name}}</a></td>
+
+                    <td>
+                        <?
+                            switch ($_GET['Type'])
+                            {
+                                case 'All':
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Name}}</a>";
+                                    break;
+
+                                case 'SubCompany':
+                                    echo "<a href='YellowPageSubCompany.php?Id={{company.Id}}'>{{company.Name}}</a>";
+                                    break;
+
+                                case 'Company':
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Name}}</a>";
+                                    break;
+
+                                case 'Business':
+                                    echo "<a href='YellowPageBusiness.php?Id={{company.Id}}'>{{company.Name}}</a>";
+                                    break;
+
+                                case 'Organization':
+                                    echo "<a href='YellowPageOrganization.php?Id={{company.DataId}}'>{{company.Name}}</a>";
+                                    break;
+
+                                case 'Fundation':
+                                    echo "<a href='YellowPageFundation.php?Id={{company.DataId}}'>{{company.Name}}</a>";
+                                    break;
+
+                                default:
+                                    echo "<a href='YellowPageCompany.php?Id={{company.Id}}'>{{company.Name}}</a>";
+                                    break;
+                            }
+                        ?>
+                    </td>
                   </tr>
 
                 </tbody>
@@ -200,7 +264,12 @@
                         case 'Business':
                             $TypeNumber = 3;
                             break;
-
+                        case 'Organization':
+                            $TypeNumber = 4;
+                            break;
+                        case 'Fundation':
+                            $TypeNumber = 5;
+                            break;
                         default:
                             $TypeNumber = 0;
                             break;
@@ -243,12 +312,14 @@
     <script>
         var yellowpage = angular.module('yellowpage', ['ui.bootstrap']);
 
-
         yellowpage.controller('yellowpage', function($scope, $http) {
+
             $http.get('fileListGet.php?start=<? echo $_GET["start"]?>&Type=<? echo $_GET["Type"]?>').success(function(data) {
                 $scope.companys = data;
             });
 
         });
+
+
     </script>
 </html>
