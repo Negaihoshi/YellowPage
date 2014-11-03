@@ -80,7 +80,9 @@
         $output[]=$row;
     }
 
-    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    //print_r($output);
+    print_r(json_encode($output));
+    //echo json_encode($output, JSON_UNESCAPED_UNICODE);
 /*
     $result = $sth->fetch(PDO::FETCH_OBJ);
     echo $result->name . $result->location;

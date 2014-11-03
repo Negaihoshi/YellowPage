@@ -72,7 +72,7 @@
                 $replacement1 = "[";
                 $pattern1 = '/\[\"\",/';
                 $Business = preg_replace($pattern1, $replacement1, $Business);
-              
+
               //  echo "Director =>".$Director."<br>";
               //  echo "ManagerList =>".$ManagerList."<br>";
               //  echo "Business =>".$Business."<br>";
@@ -80,7 +80,7 @@
                 array_push($fileList, $match[1], $data['公司狀況'], $data['公司名稱'], $data['資本總額(元)'],
                     $data['代表人姓名'], $data['公司所在地'], $data['登記機關'], $AccessTime, $LastChangeTime, $Business, $Director, $ManagerList, $data['停業日期(起)'], $data['停業日期(迄)']);
                 //print_r($fileList);
-                //$dataList = "(".implode(",", $fileList).")";
+               // $dataList = "(".implode(",", $fileList).")";
                // $sql = $defaultSQL.$dataList;
                // echo $sql;
                // mysql_query($sql) or die('<br>Insert data fail: '.mysql_error());
@@ -190,7 +190,7 @@
 
 
 
-                array_push($fileList, $match[1], 
+                array_push($fileList, $match[1],
                     $AccessTime, $LastChangeTime, $SubcompanyAddress, $SubcompanyType, $SubcompanyName, $SubcompanyManager, $Id);
                 //print_r($fileList);
                 //$dataList = "(".implode(",", $fileList).")";

@@ -192,7 +192,7 @@
 
 
         yellowpage.controller('yellowpage', function($scope, $http) {
-            $http.get('fileListGet.php?start=<? echo $_GET["start"]?>&Type=<? echo $_GET["Type"]?>').success(function(data) {
+            $http.get('FileListGet.php?start=<? echo $_GET["start"]?>&Type=<? echo $_GET["Type"]?>').success(function(data) {
                 $scope.companys = data;
             });
 
