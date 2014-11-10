@@ -208,7 +208,13 @@
                         ?>
                     </td>
 
-                    <td>{{company.Type}}</td>
+                    <td>
+                    <?php
+                        if($_GET['Type']=='Fundation')
+                            echo "基金會";
+                    ?>
+                        {{company.Type}}
+                    </td>
 
                     <td>
                         <?
@@ -319,6 +325,7 @@
             });
 
         });
+
 
 
     </script>

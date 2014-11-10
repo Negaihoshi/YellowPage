@@ -1,13 +1,22 @@
 <?php
-    
+
     if(isset($_GET["start"])==true){
         $start = $_GET["start"];
     }else{
         $start = 0;
     }
 
-    //$Type = $_GET['Type'];
-    
+    $Type = $_GET['Type'];
+    switch ($Type) {
+        case 'Fundation':
+            $Type = "Fundation";
+            $TypeResult = "`Type`="."'基金會'";
+            break;
+        default:
+            $Type = "Fundation";
+            $TypeResult = "`Type`="."'基金會'";
+            break;
+    }
 
     $db_host = "localhost";
     $db_name = "company";

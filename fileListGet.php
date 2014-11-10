@@ -66,9 +66,9 @@
     if($Type=="All"){
         $sql = "SELECT * FROM `companyIndex` Limit ".$start.",25";
     }else if($Type=="Fundation"){
-        $sql = "SELECT * FROM `fundOrganIndex` WHERE ".$TypeResult." Limit ".$start.",25";
+        $sql = "SELECT `DataId`, `Name` FROM `fundationData`  Limit ".$start.",25";
     }else if($Type=="Organization"){
-        $sql = "SELECT * FROM `fundOrganIndex` WHERE ".$TypeResult." Limit ".$start.",25";
+        $sql = "SELECT `DataId`, `Type`, `Name` FROM `organizationData`  Limit ".$start.",25";
     }else{
         $sql = "SELECT * FROM `companyIndex` WHERE `Type`= '"."$Type"."' Limit ".$start.",25";
     }
