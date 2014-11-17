@@ -94,6 +94,31 @@
         -->
       </div>
     </div>
+    <div>
+        <form class="navbar-form navbar-left" role="search" method="post" action="Search.php">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="inputstring" required>
+            </div>
+            <div class="radio" id="optradio">
+                <label><input type="radio" name="optradio" value="1">公司</label>
+                <label><input type="radio" name="optradio" value="2">分公司</label>
+                <label><input type="radio" name="optradio" value="3">商業登記</label>
+                <label><input type="radio" name="optradio" value="4">協會</label>
+                <label><input type="radio" name="optradio" value="5">基金會</label>
+            </div>
+            <div class="radio" id="option1">
+                <label><input type="radio" name="option1" class="option1" value="1">統編</label>
+                <label><input type="radio" name="option1" class="option1" value="2">名稱</label>
+                <label><input type="radio" name="option1" class="option1" value="3">地址</label>
+            </div>
+            <div class="radio" id="option2">
+                <label><input type="radio" name="option2" class="option2" value="1">名稱</label>
+                <label><input type="radio" name="option2" class="option2" value="2">地址</label>
+            </div>
+            <input type="hidden" name="flag" id="flag" value="">
+            <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
 
     <div class="container-fluid" ng-controller="yellowpage">
 
@@ -328,5 +353,21 @@
 
 
 
+    </script>
+    <script>
+            $('#optradio').change(function() {
+                if($('input[name="optradio"]:checked').val() == 1 || $('input[name="optradio"]:checked').val() == 2 || $('input[name="optradio"]:checked').val() == 3)
+                {
+                    $('#option2').hide();
+                    $('#option1').show();
+                    $('input#flag').val("0");
+                }
+                else if($('input[name="optradio"]:checked').val() == 4 || $('input[name="optradio"]:checked').val() == 5)
+                {
+                    $('#option1').hide();
+                    $('#option2').show();
+                    $('input#flag').val("1");
+                }
+            }).change();
     </script>
 </html>
