@@ -355,6 +355,10 @@
 
     </script>
     <script>
+            $(function(){
+                $('#option1').hide();
+                $('#option2').hide();
+            });
             $('#optradio').change(function() {
                 if($('input[name="optradio"]:checked').val() == 1 || $('input[name="optradio"]:checked').val() == 2 || $('input[name="optradio"]:checked').val() == 3)
                 {

@@ -31,6 +31,7 @@ switch($TypeNumber) {
         $sql = "SELECT * FROM `companyData`";
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        $option2 = 0;
         while($number_of_rows = $sth->fetch(PDO::FETCH_ASSOC))
         {
             if($flag == 0)
@@ -70,6 +71,7 @@ switch($TypeNumber) {
         $sql = "SELECT * FROM `subcompanyData`";
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        $option2 = 0;
         while($number_of_rows = $sth->fetch(PDO::FETCH_ASSOC))
         {
             if($flag == 0)
@@ -109,6 +111,7 @@ switch($TypeNumber) {
         $sql = "SELECT * FROM `businessData`";
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        $option2 = 0;
         while($number_of_rows = $sth->fetch(PDO::FETCH_ASSOC))
         {
             if($flag == 0)
@@ -148,6 +151,7 @@ switch($TypeNumber) {
         $sql = "SELECT * FROM `organizationData`";
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        $option1 = 0;
         while($number_of_rows = $sth->fetch(PDO::FETCH_ASSOC))
         {
             if($flag == 1)
@@ -182,6 +186,7 @@ switch($TypeNumber) {
         $sql = "SELECT * FROM `fundationData`";
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        $option1 = 0;
         while($number_of_rows = $sth->fetch(PDO::FETCH_ASSOC))
         {
             if($flag == 1)
