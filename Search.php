@@ -332,7 +332,7 @@ json_encode($data);
                 <tbody>
 <?php
     if (empty($data))
-    echo "ffsffsffs";
+        echo "<tr><td>查無資料!!請重新搜尋</td></tr>";
     switch($Type)
     {
         case 'Company':
@@ -390,6 +390,7 @@ json_encode($data);
         default:
             break;
     }
+
 ?>
 
 
